@@ -12,7 +12,7 @@ export function Todo(props) {
   function addTask(e) {
     if (e == '') return;
     if (tasksList.some(task => e == task) == true) {
-      alert('Пошёл нахуй, долбаёб! Такая заметка уже существует!');
+      alert('Такая заметка уже существует!');
     } else {
       setTasksList([...tasksList, e]);
     }
