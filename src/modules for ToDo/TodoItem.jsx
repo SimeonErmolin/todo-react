@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export function TodoItem(props) {
+export function TodoItem({onDeleteTask, taskNumber, textTask}) {
   const [taskDone, setTaskDone] = useState('task');
 
   function handleChange() {
@@ -12,13 +12,13 @@ export function TodoItem(props) {
   }
 
   function deleteTask() {
-    props.onDeleteTask(props.taskNumber);
+    onDeleteTask(taskNumber);
   }
 
   return (
     <div className={taskDone}>
       <input type="checkbox" onChange={handleChange} />
-      <p>{props.textTask}</p>
+      <p>{textTask}</p>
       <button className="delete" onClick={deleteTask}></button>
     </div>
   )

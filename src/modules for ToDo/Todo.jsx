@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { TodoForm } from "./TodoForm";
 import { TodoItem } from "./TodoItem";
 
-export function Todo(props) {
-  const title = props.importance == 'high' ? 'HIGH' : 'LOW';
+export function Todo({importance}) {
+  const title = importance == 'high' ? 'HIGH' : 'LOW';
   const [tasksList, setTasksList] = useState([]);
   const listOfTasks = tasksList.map((item, index) => {
     return <TodoItem key={item.toString()} textTask={item} taskNumber={index} onDeleteTask={deleteTask} />
@@ -23,9 +23,9 @@ export function Todo(props) {
   }
 
   return (
-    <div className={props.importance}>
+    <div className={importance}>
       <h2 className="title">{title}</h2>
-      <TodoForm importance={props.importance} onGetUserValue={addTask} />
+      <TodoForm importance={importance} onGetUserValue={addTask} />
       <div>
         {listOfTasks}
       </div>

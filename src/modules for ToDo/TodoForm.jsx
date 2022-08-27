@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-export function TodoForm(props) {
+export function TodoForm({importance, onGetUserValue}) {
   const [textTask, setTextTask] = useState('');
-  const inputPlaceholder = props.importance == 'high' ? 'Добавить важных дел' : 'Добавить';
+  const inputPlaceholder = importance == 'high' ? 'Добавить важных дел' : 'Добавить';
 
   function taskChange(e) {
     setTextTask(e.target.value);
@@ -10,7 +10,7 @@ export function TodoForm(props) {
 
   function sendForm(e) {
     e.preventDefault();
-    props.onGetUserValue(textTask);
+    onGetUserValue(textTask);
     setTextTask('');
   }
 
