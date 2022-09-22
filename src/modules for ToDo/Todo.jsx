@@ -1,34 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { TodoForm } from "./TodoForm";
-import { TodoItem } from "./TodoItem";
+import {ListOfTodos} from "./ListOfTodos";
 
 export function Todo({importance}) {
-  const title = importance == 'high' ? 'HIGH' : 'LOW';
-  const [tasksList, setTasksList] = useState([]);
-  const listOfTasks = tasksList.map((item, index) => {
-    return <TodoItem key={item.toString()} textTask={item} taskNumber={index} onDeleteTask={deleteTask} />
-  })
-
-  function addTask(e) {
-    if (e == '') return;
-    if (tasksList.some(task => e == task) == true) {
-      alert('Такая заметка уже существует!');
-    } else {
-      setTasksList([...tasksList, e]);
-    }
-  }
-
-  function deleteTask(e) {
-    setTasksList([...tasksList.slice(0, e), ...tasksList.slice(e + 1)]);
-  }
+  const title = importance === 'high' ? 'HIGH' : 'LOW';
 
   return (
     <div className={importance}>
       <h2 className="title">{title}</h2>
-      <TodoForm importance={importance} onGetUserValue={addTask} />
-      <div>
-        {listOfTasks}
-      </div>
+      <TodoForm importance={importance} />
+      <ListOfTodos importance={importance} />
     </div>
   )
 }
