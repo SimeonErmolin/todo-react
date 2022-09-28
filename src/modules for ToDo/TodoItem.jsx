@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {highListTask, lowListTask} from "./actions.js";
+import {changeHighListTasks, changeLowListTasks} from "../redux/redux.js";
 
 export function TodoItem({textTask, taskNumber, importance}) {
   const tasksList = importance === 'high'
-      ? useSelector(state => state.highListOfTasks)
-      : useSelector(state => state.lowListOfTasks);
+      ? useSelector(state => state.toDoApp.highListTasks)
+      : useSelector(state => state.toDoApp.lowListTasks);
   const dispatch = useDispatch();
   const [taskDone, setTaskDone] = useState('task');
 
@@ -19,8 +19,8 @@ export function TodoItem({textTask, taskNumber, importance}) {
 
   function deleteTask() {
     importance === 'high'
-        ? dispatch(highListTask([...tasksList.slice(0, taskNumber), ...tasksList.slice(taskNumber + 1)]))
-        : dispatch(lowListTask([...tasksList.slice(0, taskNumber), ...tasksList.slice(taskNumber + 1)]));
+        ? dispatch(changeHighListTasks([...tasksList.slice(0, taskNumber), ...tasksList.slice(taskNumber + 1)]))
+        : dispatch(changeLowListTasks([...tasksList.slice(0, taskNumber), ...tasksList.slice(taskNumber + 1)]));
   }
 
   return (

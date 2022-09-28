@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {highListTask, lowListTask} from "./actions.js";
+
+import {changeHighListTasks, changeLowListTasks} from "../redux/redux.js";
 
 export function TodoForm({importance}) {
   const dispatch = useDispatch();
   const tasksList = importance === 'high'
-      ? useSelector(state => state.highListOfTasks)
-      : useSelector(state => state.lowListOfTasks);
+      ? useSelector(state => state.toDoApp.highListTasks)
+      : useSelector(state => state.toDoApp.lowListTasks);
 
   const [textTask, setTextTask] = useState('');
   const inputPlaceholder = importance === 'high' ? 'Добавить важных дел' : 'Добавить';
@@ -23,8 +24,8 @@ export function TodoForm({importance}) {
       alert('Такая заметка уже существует!');
     } else {
       importance === 'high'
-          ? dispatch(highListTask([...tasksList, textTask]))
-          : dispatch(lowListTask([...tasksList, textTask]))
+          ? dispatch(changeHighListTasks([...tasksList, textTask]))
+          : dispatch(changeLowListTasks([...tasksList, textTask]))
     }
     setTextTask('');
   }

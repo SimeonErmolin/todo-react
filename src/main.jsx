@@ -2,11 +2,17 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {App} from './App'
 import './style.css'
-import {createStore} from "redux";
-import {todoApp} from "./modules for ToDo/reducers.js";
 import {Provider} from "react-redux";
+import {configureStore, combineReducers} from "@reduxjs/toolkit";
+import toDoSlice from "./redux/redux.js";
 
-const store = createStore(todoApp);
+const rootReducer = combineReducers({
+    toDoApp: toDoSlice
+})
+
+const store = configureStore({
+    reducer: rootReducer
+})
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
